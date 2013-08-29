@@ -3,11 +3,11 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<TextView android:id="@+id/textView" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="Hello" />
+		android:layout_height="wrap_content" android:text="Enter your name below:" />
 	<EditText android:id="@+id/editText" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 	<Button android:id="@+id/button" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="Msg to JavaScript" />
+		android:layout_height="wrap_content" android:text="Update form with your name" />
 	<WebView android:id="@+id/webview" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 </LinearLayout>

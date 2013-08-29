@@ -3,25 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width; user-scalable=0;" />
-<title>My HTML</title>
+<title>Debt Calculator</title>
 </head>
 <body>
-<h1>MyHTML</h1>
-<p id="mytext">Hello!</p>
-<input type="button" value="Say hello" onClick="showAndroidToast('Hello Android!')" />
-<input type="button" value="Open Dialog" onClick="openAndroidDialog()" />
+<h2>Debt Calculator</h2>
+<p id="nameText">John Smith:</p>
+<form action="calculate()">
+  Mortgage debt: <input type="number" name="mortgage" id="mortgage"><br>
+  Vehicle debt: <input type="number" name="vehicle" id="vehicle"><br>
+  Credit card debt: <input type="number" name="creditCard" id="creditCard"><br>
+  Student loan debt: <input type="number" name="studentLoan" id="studentLoan"><br>
+  Hospital Bill debt: <input type="number" name="hospitalBill" id="hospitalBill"><br>
+  Other debt: <input type="number" name="other" id="other"><br>
+  <input type="button" value="Calculate" onClick="calculate()" />
+</form>
+
+<p id="totalLabel">Your total debt is:</p> 
+<h3 id="total"></h3> 
+
 <script language="javascript">
-   function showAndroidToast(toast) {
-       AndroidFunction.showToast(toast);
+   function calculate() {
+		var mortgage = document.getElementById('mortgage').value;
+		var vehicle = document.getElementById('vehicle').value;
+		var creditCard = document.getElementById('creditCard').value;
+		var studentLoan = document.getElementById('studentLoan').value;
+		var hospitalBill = document.getElementById('hospitalBill').value;
+		var other = document.getElementById('other').value;
+		var totalDebt = +mortgage + +vehicle + +creditCard + +studentLoan + +hospitalBill + +other;
+		
+		document.getElementById("total").innerHTML = "$" + totalDebt.formatMoney(2, '.', ',');
+		<!--AndroidFunction.OnJsClick_SelectedItem(this.options[this.selectedIndex].text;-->
    }
 
-   function openAndroidDialog() {
-       AndroidFunction.openAndroidDialog();
-   }
-  
    function callFromActivity(msg){
- document.getElementById("mytext").innerHTML = msg;
+ 		document.getElementById("nameText").innerHTML = msg;
    }
+   
+   <!--http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript-->
+   Number.prototype.formatMoney = function(c, d, t){
+		var n = this, 
+    	c = isNaN(c = Math.abs(c)) ? 2 : c, 
+    	d = d == undefined ? "." : d, 
+    	t = t == undefined ? "," : t, 
+    	s = n < 0 ? "-" : "", 
+    	i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+    	j = (j = i.length) > 3 ? j % 3 : 0;
+   		return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ 	};
 </script>
 
 </body>

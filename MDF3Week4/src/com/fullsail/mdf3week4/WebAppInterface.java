@@ -1,3 +1,12 @@
+/*
+ * project 	MDF3Week4
+ * 
+ * package 	com.fullsail.mdf3week4
+ * 
+ * @author 	William Saults
+ * 
+ * date 	Aug 28, 2013
+ */
 package com.fullsail.mdf3week4;
 
 import android.content.Context;
