@@ -14,6 +14,9 @@ import com.fullsail.mdf3week4.WebAppInterface;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.view.Menu;
 import android.view.View;
@@ -33,15 +36,19 @@ public class WebViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_view);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); 
-		webView = (WebView) findViewById(R.id.webview);
-		webView.getSettings().setJavaScriptEnabled(true); 
+		webView = (WebView) findViewById(R.id.webview); 
 
-		final WebAppInterface webAppInterface = new WebAppInterface(this);
-		webView.addJavascriptInterface(webAppInterface, "AndroidFunction");
+		WebAppInterface webAppInterface = new WebAppInterface(this);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.addJavascriptInterface(webAppInterface, "WebAppInterface");
 
 		webView.loadUrl("file:///android_asset/webpage.html");
 
+		SharedPreferences preferences;
+		preferences = this.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+		String nameString = preferences.getString("name", "John Smith");
 		nameEditText = (EditText)findViewById(R.id.editText);
+		nameEditText.setText(nameString);
 		Button btnSendMsg = (Button)findViewById(R.id.button);
 		btnSendMsg.setOnClickListener(new Button.OnClickListener(){
 			@Override
@@ -53,17 +60,6 @@ public class WebViewActivity extends Activity {
 		});
 	}
 	
-	public void OnJsClick_SelectedItem(final String str)
-	{
-		new Runnable() {
-	        //@Override
-	        public void run()
-	        {
-	        	getValue(str);
-	        }
-	    };
-	}
-	
 	public String getValue(String str)
 	{
 		webView.loadUrl("javascript:function1(colors)");
@@ -71,12 +67,20 @@ public class WebViewActivity extends Activity {
 	    return str;
 
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.web_view, menu);
 		return true;
+	}
+	
+	public void goBack() {
+		// Send the choosen temp format back.
+		Intent a = new Intent(getApplicationContext(),MainActivity.class);
+		setResult(RESULT_OK, a);
+		super.finish();
 	}
 
 }

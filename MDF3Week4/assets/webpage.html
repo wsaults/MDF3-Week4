@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width; user-scalable=0;" />
 <title>Debt Calculator</title>
+<link rel='stylesheet' type='text/css' href='styles.css' />
 </head>
 <body>
 <h2>Debt Calculator</h2>
@@ -13,7 +14,7 @@
   Vehicle debt: <input type="number" name="vehicle" id="vehicle"><br>
   Credit card debt: <input type="number" name="creditCard" id="creditCard"><br>
   Student loan debt: <input type="number" name="studentLoan" id="studentLoan"><br>
-  Hospital Bill debt: <input type="number" name="hospitalBill" id="hospitalBill"><br>
+  Medical Bill debt: <input type="number" name="hospitalBill" id="hospitalBill"><br>
   Other debt: <input type="number" name="other" id="other"><br>
   <input type="button" value="Calculate" onClick="calculate()" />
 </form>
@@ -32,7 +33,7 @@
 		var totalDebt = +mortgage + +vehicle + +creditCard + +studentLoan + +hospitalBill + +other;
 		
 		document.getElementById("total").innerHTML = "$" + totalDebt.formatMoney(2, '.', ',');
-		<!--AndroidFunction.OnJsClick_SelectedItem(this.options[this.selectedIndex].text;-->
+		window.WebAppInterface.displayData(document.getElementById("nameText").innerHTML, document.getElementById("total").innerHTML);
    }
 
    function callFromActivity(msg){

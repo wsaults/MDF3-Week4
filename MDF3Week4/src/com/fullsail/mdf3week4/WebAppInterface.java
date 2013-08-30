@@ -10,9 +10,8 @@
 package com.fullsail.mdf3week4;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.SharedPreferences;
 import android.webkit.JavascriptInterface;
-import android.widget.Toast;
 
 public class WebAppInterface {
 	
@@ -22,14 +21,17 @@ public class WebAppInterface {
 		_context = context;
 	} 
 	
-	/** Show a toast from the web page */
-	public void showToast(String toast) {
-	    Toast.makeText(_context, toast, Toast.LENGTH_SHORT).show();
-	}
-	
-	
 	@JavascriptInterface
-	public void uselessMethod(String something){
-		Log.i("USELESS",something);
-	} 
+	public void displayData(String name, String total) {
+		// Save parameters into preferences
+		SharedPreferences preferences;
+		SharedPreferences.Editor editor;
+		preferences = _context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+		editor = preferences.edit();
+		editor.putString("name", name);
+		editor.putString("total", total);
+		editor.commit();
+			
+		((WebViewActivity)_context).goBack();
+	}
 }

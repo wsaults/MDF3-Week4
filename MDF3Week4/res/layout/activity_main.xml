@@ -16,4 +16,24 @@
 	    android:layout_alignParentRight="true"
 	    android:text="Open Calculator" />
 
+	<TextView
+	    android:id="@+id/mainDebtTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/mainNameTextView"
+	    android:layout_alignRight="@+id/webActivityButton"
+	    android:layout_centerVertical="true"
+	    android:text="Total"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TextView
+	    android:id="@+id/mainNameTextView"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/mainDebtTextView"
+	    android:layout_alignLeft="@+id/webActivityButton"
+	    android:layout_alignRight="@+id/webActivityButton"
+	    android:text="Name"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>
